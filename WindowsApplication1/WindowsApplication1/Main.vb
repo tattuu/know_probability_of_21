@@ -415,6 +415,11 @@
                 Label8.Text = ransu     'ラベルに生成した乱数を表示
 
                 printt(8, ransu)    'printt関数を呼び出しpictureboxに表面表示
+                If Label6.Text = 1 Or Label7.Text = 1 Then ' これまでのカードに1が含まれている場合(今回引いたカードについての処理は下のIf文で処理)
+                    If goukei2 + Label8.Text > 21 Then ' 1があり、かつ、この条件が真ならば、一つでも1を11として扱うと、バーストするので、1はすべて1として扱う(If文内で再計算する)
+                        goukei2 = Integer.Parse(Label6.Text) + Integer.Parse(Label7.Text) ' 1を1として合計値を再計算
+                    End If
+                End If
                 If Label8.Text <= 10 Then '10以下の場合'
                     If Label8.Text = 1 And goukei2 + 11 <= 21 Then '3枚目が1の場合であり、かつ、これまでのカードとの合計が21以下の場合'
                         ten_over_judge = 11 '三枚目のカードである1を11とする'
@@ -433,6 +438,11 @@
                 Label9.Text = ransu     'ラベルに生成した乱数を表示
 
                 printt(9, ransu)    'printt関数を呼び出しpictureboxに表面表示
+                If Label6.Text = 1 Or Label7.Text = 1 Or Label8.Text = 1 Then ' これまでのカードに1が含まれている場合(今回引いたカードについての処理は下のIf文で処理)
+                    If goukei2 + Label9.Text > 21 Then ' 1があり、かつ、この条件が真ならば、一つでも1を11として扱うと、バーストするので、1はすべて1として扱う(If文内で再計算する)
+                        goukei2 = Integer.Parse(Label6.Text) + Integer.Parse(Label7.Text) + Integer.Parse(Label8.Text) ' 1を1として合計値を再計算
+                    End If
+                End If
                 If Label9.Text <= 10 Then '10以下の場合'
                     If Label9.Text = 1 And goukei2 + 11 <= 21 Then '3枚目が1の場合であり、かつ、これまでのカードとの合計が21以下の場合'
                         ten_over_judge = 11 '三枚目のカードである1を11とする'
@@ -451,6 +461,11 @@
                 Label10.Text = ransu     'ラベルに生成した乱数を表示
 
                 printt(10, ransu)    'printt関数を呼び出しpictureboxに表面表示
+                If Label6.Text = 1 Or Label7.Text = 1 Or Label8.Text = 1 Or Label9.Text = 1 Then ' これまでのカードに1が含まれている場合(今回引いたカードについての処理は下のIf文で処理)
+                    If goukei2 + Label10.Text > 21 Then ' 1があり、かつ、この条件が真ならば、一つでも1を11として扱うと、バーストするので、1はすべて1として扱う(If文内で再計算する)
+                        goukei2 = Integer.Parse(Label6.Text) + Integer.Parse(Label7.Text) + Integer.Parse(Label8.Text) + Integer.Parse(Label9.Text) ' 1を1として合計値を再計算
+                    End If
+                End If
                 If Label10.Text <= 10 Then '10以下の場合'
                     If Label10.Text = 1 And goukei2 + 11 <= 21 Then '3枚目が1の場合であり、かつ、これまでのカードとの合計が21以下の場合'
                         ten_over_judge = 11 '三枚目のカードである1を11とする'
