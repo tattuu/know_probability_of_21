@@ -6,54 +6,65 @@ WindowsApplication1
 </name>
 </assembly>
 <members>
+<member name="T:WindowsApplication1.My.Resources.Resources">
+<summary>
+  ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
+</summary>
+</member>
 <member name="P:WindowsApplication1.My.Resources.Resources.ResourceManager">
-	<summary>
+<summary>
   このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
 </summary>
-</member><member name="P:WindowsApplication1.My.Resources.Resources.Culture">
-	<summary>
+</member>
+<member name="P:WindowsApplication1.My.Resources.Resources.Culture">
+<summary>
   厳密に型指定されたこのリソース クラスを使用して、すべての検索リソースに対し、
   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
 </summary>
-</member><member name="P:WindowsApplication1.My.Resources.Resources._1463026156352">
-	<summary>
+</member>
+<member name="P:WindowsApplication1.My.Resources.Resources._1463026156352">
+<summary>
   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
 </summary>
-</member><member name="P:WindowsApplication1.My.Resources.Resources._1463026162081">
-	<summary>
+</member>
+<member name="P:WindowsApplication1.My.Resources.Resources._1463026162081">
+<summary>
   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
 </summary>
-</member><member name="P:WindowsApplication1.My.Resources.Resources.black_childform">
-	<summary>
+</member>
+<member name="P:WindowsApplication1.My.Resources.Resources.black_childform">
+<summary>
   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
 </summary>
-</member><member name="P:WindowsApplication1.My.Resources.Resources.hit">
-	<summary>
+</member>
+<member name="P:WindowsApplication1.My.Resources.Resources.hit">
+<summary>
   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
 </summary>
-</member><member name="P:WindowsApplication1.My.Resources.Resources.stand">
-	<summary>
+</member>
+<member name="P:WindowsApplication1.My.Resources.Resources.stand">
+<summary>
   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
 </summary>
-</member><member name="P:WindowsApplication1.My.Resources.Resources.start">
-	<summary>
+</member>
+<member name="P:WindowsApplication1.My.Resources.Resources.start">
+<summary>
   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
 </summary>
-</member><member name="P:WindowsApplication1.My.Resources.Resources.start1">
-	<summary>
+</member>
+<member name="P:WindowsApplication1.My.Resources.Resources.start1">
+<summary>
   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
 </summary>
-</member><member name="P:WindowsApplication1.My.Resources.Resources.Trumpback">
-	<summary>
+</member>
+<member name="P:WindowsApplication1.My.Resources.Resources.Trumpback">
+<summary>
   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
 </summary>
-</member><member name="P:WindowsApplication1.My.Resources.Resources.Trumpback_jpg">
-	<summary>
+</member>
+<member name="P:WindowsApplication1.My.Resources.Resources.Trumpback_jpg">
+<summary>
   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
-</summary>
-</member><member name="T:WindowsApplication1.My.Resources.Resources">
-	<summary>
-  ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
 </summary>
 </member>
 </members>

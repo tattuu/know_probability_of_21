@@ -241,3 +241,16 @@ G:\pinoko1\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplicat
 C:\Users\sb54026\Desktop\B54026\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.exe
 C:\Users\sb54026\Desktop\B54026\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.xml
 C:\Users\sb54026\Desktop\B54026\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.pdb
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.exe
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.xml
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.pdb
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.exe
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.pdb
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.xml
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.vbprojResolveAssemblyReference.cache
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.ChildDialog.resources
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.Main.resources
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.Resources.resources
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.store.resources
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.Top.resources
+C:\Users\Tatsuyoshi\Desktop\サポーターズ関連\pinoko\pinoko\WindowsApplication1\WindowsApplication1\obj\x86\Debug\WindowsApplication1.vbproj.GenerateResource.Cache

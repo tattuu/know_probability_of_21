@@ -35,7 +35,6 @@
         Dim goukei2 As Integer  '自分の合計値
         goukei2 = 0 '自分の合計値を初期化
         Dim r As New Random '乱数宣言
-
         Dim number1 As Integer = r.Next(1, 14)  '乱数生成
         ransu = number1.ToString    '乱数を変数ransuに代入
 
@@ -61,6 +60,9 @@
         printt(6, ransu)    'printt関数を呼び出しpictureboxに表面表示
 
         If Label6.Text <= 10 Then
+            If Label6.Text = 1 Then
+                goukei2 = 11
+            End If
             goukei2 = ransu
         Else
             goukei2 = 10
@@ -72,17 +74,26 @@
         Label7.Text = ransu     'ラベルに生成した乱数を表示
 
         printt(7, ransu)    'printt関数を呼び出しpictureboxに表面表示
-
-        If Label7.Text <= 10 Then
-            goukei2 = goukei2 + Label7.Text
+        If Label7.Text < 10 Then
+            If goukei2 = 1 Then '1が含まれているかどうか'
+                If 11 + Label7.Text <= 20 Then '1枚目を11として2枚目との合計が20以下の場合(最大値：1枚目が1で2枚目が9なら20)'
+                    goukei2 = 11 + Label7.Text '1を11として合計値に足しこみ
+                End If
+            ElseIf Label7.Text = 1 Then '二枚目が1ならば'
+                If goukei2 + 11 <= 21 Then '2枚目を11として1枚目との合計が21以下の場合(最大値：1枚目が10で2枚目が1ならBJ)'
+                    goukei2 = goukei2 + 11 '相手二枚目の手札が10未満で1を含むなら1を11として合計値に足しこみ
+                End If
+            Else
+                goukei2 = goukei2 + Label7.Text '1が含まれていない場合はそのままの値を足す'
+            End If
+        ElseIf goukei2 = 1 Then '相手の二枚目の手札が10以上でブラックジャックが成立している場合'
+            goukei2 = 21
         Else
-            goukei2 = goukei2 + 10
+            goukei2 = goukei2 + 10  'そうでなければ合計値に10を加算する
         End If
-
         Label12.Text = goukei2
-
     End Sub
-
+    'この関数の上部はディーラーのHITを処理する部分で、下部は勝敗の判断を行う関数'
     Private Sub stand_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Stand.Click
         finishicode = 1 'finishicodeに1を代入
 
@@ -97,6 +108,7 @@
         Dim r As New Random '乱数宣言
         Dim f1 As New Main  'メインフォーム呼び出しに使用
         Dim answer2 As New MsgBoxResult 'メッセージボックスYesNo型の結果代入変数
+        Dim ten_over_judge As Integer '3枚目以降のカードについて、適切な値を設定するために使用する'
 
         Dim number1 As Integer = r.Next(1, 14)  '乱数生成
         ransu = number1.ToString    '乱数を変数ransuに代入
@@ -105,59 +117,151 @@
 
         printt(2, ransu)    'printt関数を呼び出しpictureboxに表面表示
 
-        If Label2.Text <= 10 Then
-            goukei1 = goukei1 + Label2.Text '相手二枚目の手札が10以下なら合計値に足しこみ
+        If Label2.Text < 10 Then
+            If goukei1 = 1 Then '1が含まれているかどうか'
+                If 11 + Label2.Text <= 20 Then '1枚目を11として2枚目との合計が20以下の場合(最大値：1枚目が1で2枚目が9なら20)'
+                    goukei1 = 11 + Label2.Text '1を11として合計値に足しこみ
+                End If
+            ElseIf Label2.Text = 1 Then '二枚目が1ならば'
+                If goukei1 + 11 <= 21 Then '2枚目を11として1枚目との合計が21以下の場合(最大値：1枚目が10で2枚目が1ならBJ)'
+                    goukei1 = goukei1 + 11 '相手二枚目の手札が10未満で1を含むなら1を11として合計値に足しこみ
+                End If
+            Else
+                goukei1 = goukei1 + Label2.Text '1が含まれていない場合はそのままの値を足す'
+            End If
+        ElseIf goukei1 = 1 Then '相手の二枚目の手札が10以上でブラックジャックが成立している場合'
+            goukei1 = 21
         Else
             goukei1 = goukei1 + 10  'そうでなければ合計値に10を加算する
         End If
 
-        Do  'ループ
-            Select Case kaisu1 'kaisu1について
-                Case 0  '一回目
-                    Dim number2 As Integer = r.Next(1, 14)  '乱数生成
-                    ransu = number2.ToString    '乱数を変数ransuに代入
 
-                    Label3.Text = ransu     'ラベルに生成した乱数を表示
 
-                    printt(3, ransu)    'printt関数を呼び出しpictureboxに表面表示
+        If goukei1 < 17 Then
+            Do  'ループ
+                Select Case kaisu1 'kaisu1について
+                    Case 0  '一回目
+                        Dim number2 As Integer = r.Next(1, 14)  '乱数生成
+                        ransu = number2.ToString　'乱数を変数ransuに代入
 
-                    If Label3.Text <= 10 Then
-                        goukei1 = goukei1 + Label3.Text
+                        Label3.Text = ransu　'ラベルに生成した乱数を表示
+
+                        printt(3, ransu)　'printt関数を呼び出しpictureboxに表面表示
+
+                        If Label3.Text <= 10 Then '10以下の場合'
+                            If Label3.Text = 1 And goukei1 + 11 <= 21 Then '3枚目が1の場合であり、かつ、これまでのカードとの合計が21以下の場合'
+                                ten_over_judge = 11 '三枚目のカードである1を11とする'
+                            Else
+                                ten_over_judge = Label3.Text '1を1のままとする'
+                            End If
+                        Else
+                            ten_over_judge = 10 '10より大きい値は10とする'
+                        End If
+                        goukei1 = goukei1 + ten_over_judge
+
+                        kaisu1 = kaisu1 + 1 '3枚目の時のkaisu1を0として、引く度にその値をインクリメント'
+                    Case 1  '二回目
+                        Dim number3 As Integer = r.Next(1, 14)  '乱数生成
+                        ransu = number3.ToString    '乱数を変数ransuに代入
+
+                        Label4.Text = ransu     'ラベルに生成した乱数を表示
+
+                        printt(4, ransu)    'printt関数を呼び出しpictureboxに表面表示
+                        If Label4.Text <= 10 Then
+                            If Label4.Text = 1 And goukei1 + 11 <= 21 Then '4枚目が1の場合であり、かつ、これまでのカードとの合計が21以下の場合'
+                                ten_over_judge = 11 '三枚目のカードである1を11とする'
+                            Else
+                                ten_over_judge = Label4.Text '1を1のままとする'
+                            End If
+                        Else
+                            ten_over_judge = 10 '10より大きい値は10とする'
+                        End If
+                        goukei1 = goukei1 + ten_over_judge 'ディーラーの合計値を更新'
+
+                        kaisu1 = kaisu1 + 1 '4枚目の時のkaisu1を1として、引く度にその値をインクリメント'
+                    Case 2  '三回目
+                        Dim number4 As Integer = r.Next(1, 14)  '乱数生成
+                        ransu = number4.ToString    '乱数を変数ransuに代入
+
+                        Label5.Text = ransu     'ラベルに生成した乱数を表示
+
+                        printt(5, ransu)    'printt関数を呼び出しpictureboxに表面表示
+                        If Label5.Text <= 10 Then
+                            If Label5.Text = 1 And goukei1 + 11 <= 21 Then '5枚目が1の場合であり、かつ、これまでのカードとの合計が21以下の場合'
+                                ten_over_judge = 11 '三枚目のカードである1を11とする'
+                            Else
+                                ten_over_judge = Label5.Text '1を1のままとする'
+                            End If
+                        Else
+                            ten_over_judge = 10 '10より大きい値は10とする'
+                        End If
+                        goukei1 = goukei1 + ten_over_judge 'ディーラーの合計値を更新'
+
+                        kaisu1 = kaisu1 + 1 '5枚目の時のkaisu1を2として、引く度にその値をインクリメント'
+                End Select
+            Loop Until goukei1 >= 17 Or kaisu1 >= 3 '17未満の数字の場合である限り、カードを5枚まで引くことができる。'
+            Label11.Text = goukei1  '合計値をラベルに反映
+            goukei2 = Label12.Text  '自分の現在の合計値をgoukei2に代入
+        End If
+        If kaisu1 = 3 And (goukei1 < 17 Or (goukei1 = 17 And (Label1.Text = "1" Or Label2.Text = "1" Or Label3.Text = "1" Or Label4.Text = "1" Or Label5.Text = "1"))) Then 'kaisu1が3(5枚目まで引いている状態)であり、6枚目を引かないといけない場合(まだ17未満場合 or Dealer must hit on soft 17を採用しているので、ソフト17の時だけは17でもHITしないといけないので、5枚目でソフト17になった場合の二つが該当
+            Dim Answer As MsgBoxResult
+            Answer = MsgBox("これ以上HITできない仕様になっています。" & vbCrLf & " 申し訳ございませんが、このゲームをノーカウントとし、STANDを押して次のゲームに進んでください。", MsgBoxStyle.OkOnly, "error")
+            kaisu1 = kaisu1 + 1
+        End If
+        If goukei1 = 17 And (Label1.Text = "1" Or Label2.Text = "1" Or Label3.Text = "1" Or Label4.Text = "1" Or Label5.Text = "1") Then 'Dealer must hit on soft 17を採用しているので、ソフト17の時だけ17でもHITしないといけないので、この条件式に真であれば、if文内でもう一回だけ引く。'
+            If kaisu1 = 0 Then
+                Dim number2 As Integer = r.Next(1, 14)  '乱数生成
+                ransu = number2.ToString    '乱数を変数ransuに代入
+
+                Label3.Text = ransu     'ラベルに生成した乱数を表示
+
+                printt(3, ransu)    'printt関数を呼び出しpictureboxに表面表示
+                If Label3.Text <= 10 Then
+                    If Label3.Text = 1 And goukei1 + 11 <= 21 Then '3枚目が1の場合であり、かつ、これまでのカードとの合計が21以下の場合'
+                        ten_over_judge = 11 '三枚目のカードである1を11とする'
                     Else
-                        goukei1 = goukei1 + 10
+                        ten_over_judge = Label3.Text '1を1のままとする'
                     End If
-                    kaisu1 = kaisu1 + 1
-                Case 1  '二回目
-                    Dim number3 As Integer = r.Next(1, 14)  '乱数生成
-                    ransu = number3.ToString    '乱数を変数ransuに代入
+                Else
+                    ten_over_judge = 10 '10より大きい値は10とする'
+                End If
+                goukei1 = goukei1 + ten_over_judge 'ディーラーの合計値を更新'
+            ElseIf kaisu1 = 1 Then
+                Dim number3 As Integer = r.Next(1, 14)  '乱数生成
+                ransu = number3.ToString    '乱数を変数ransuに代入
 
-                    Label4.Text = ransu     'ラベルに生成した乱数を表示
+                Label4.Text = ransu     'ラベルに生成した乱数を表示
 
-                    printt(4, ransu)    'printt関数を呼び出しpictureboxに表面表示
-
-                    If Label4.Text <= 10 Then
-                        goukei1 = goukei1 + Label4.Text
+                printt(4, ransu)    'printt関数を呼び出しpictureboxに表面表示
+                If Label4.Text <= 10 Then
+                    If Label4.Text = 1 And goukei1 + 11 <= 21 Then '4枚目が1の場合であり、かつ、これまでのカードとの合計が21以下の場合'
+                        ten_over_judge = 11 '三枚目のカードである1を11とする'
                     Else
-                        goukei1 = goukei1 + 10
+                        ten_over_judge = Label4.Text '1を1のままとする'
                     End If
-                    kaisu1 = kaisu1 + 1
-                Case 2  '三回目
-                    Dim number4 As Integer = r.Next(1, 14)  '乱数生成
-                    ransu = number4.ToString    '乱数を変数ransuに代入
+                Else
+                    ten_over_judge = 10 '10より大きい値は10とする'
+                End If
+                goukei1 = goukei1 + ten_over_judge 'ディーラーの合計値を更新'
+            ElseIf kaisu1 = 2 Then
+                Dim number4 As Integer = r.Next(1, 14)  '乱数生成
+                ransu = number4.ToString    '乱数を変数ransuに代入
 
-                    Label5.Text = ransu     'ラベルに生成した乱数を表示
+                Label5.Text = ransu     'ラベルに生成した乱数を表示
 
-                    printt(5, ransu)    'printt関数を呼び出しpictureboxに表面表示
-
-                    If Label5.Text <= 10 Then
-                        goukei1 = goukei1 + Label5.Text
+                printt(5, ransu)    'printt関数を呼び出しpictureboxに表面表示
+                If Label5.Text <= 10 Then
+                    If Label5.Text = 1 And goukei1 + 11 <= 21 Then '5枚目が1の場合であり、かつ、これまでのカードとの合計が21以下の場合'
+                        ten_over_judge = 11 '三枚目のカードである1を11とする'
                     Else
-                        goukei1 = goukei1 + 10
+                        ten_over_judge = Label5.Text '1を1のままとする'
                     End If
-                    kaisu1 = kaisu1 + 1
-
-            End Select
-        Loop Until goukei1 > 17 Or kaisu1 >= 2
+                Else
+                    ten_over_judge = 10 '10より大きい値は10とする'
+                End If
+                goukei1 = goukei1 + ten_over_judge 'ディーラーの合計値を更新'
+            End If
+        End If
         '合計値が17以上になるか、回数が2以上になるまで繰り返す
         Label11.Text = goukei1  '合計値をラベルに反映
         goukei2 = Label12.Text  '自分の現在の合計値をgoukei2に代入
@@ -171,9 +275,13 @@
                 keep = Me.Label12.Text
 
                 Dim Answer As MsgBoxResult ' MsgBoxの結果を保存しておくための変数Answerを宣言
-                store.Label3.Text = Label6.Text ' storeフォームのLabel6にLabel3の値を代入
+                ' ディーラーの21チェック
+                store.Label3.Text = Label1.Text
+                store.Label4.Text = Label2.Text
+                store.keep() ' storeフォームのkeep関数を呼び出す(21の数を数える関数)
+                ' 自分の21チェック
+                store.Label3.Text = Label6.Text ' storeフォームのLabel3にLabel6の値を代入
                 store.Label4.Text = Label7.Text
-
                 store.keep() ' storeフォームのkeep関数を呼び出す
                 Answer = MsgBox("     あなたの勝ちです" & vbCrLf & "     もう一度しますか？", MsgBoxStyle.YesNo, "勝利")
                 roopcount += 1 ' インクリメント(必ず2になる)
@@ -197,9 +305,13 @@
                 End If
             ElseIf goukei2 = goukei1 Then   '双方の合計が一致していれば
                 Dim Answer As MsgBoxResult ' MsgBoxの結果を保存しておくための変数Answerを宣言
-                store.Label3.Text = Label6.Text
+                ' ディーラーの21チェック
+                store.Label3.Text = Label1.Text
+                store.Label4.Text = Label2.Text
+                store.keep() ' storeフォームのkeep関数を呼び出す(21の数を数える関数)
+                ' 自分の21チェック
+                store.Label3.Text = Label6.Text ' storeフォームのLabel3にLabel6の値を代入
                 store.Label4.Text = Label7.Text
-
                 store.keep() ' storeフォームのkeep関数を呼び出す
                 Answer = MsgBox("     引き分けです" & vbCrLf & "     もう一度しますか？", MsgBoxStyle.YesNo, "引き分け")
                 roopcount += 1 ' インクリメント(必ず2になる)
@@ -222,9 +334,13 @@
                 End If
             Else
                 Dim Answer As MsgBoxResult ' MsgBoxの結果を保存しておくための変数Answerを宣言
-                store.Label3.Text = Label6.Text
+                ' ディーラーの21チェック
+                store.Label3.Text = Label1.Text
+                store.Label4.Text = Label2.Text
+                store.keep() ' storeフォームのkeep関数を呼び出す(21の数を数える関数)
+                ' 自分の21チェック
+                store.Label3.Text = Label6.Text ' storeフォームのLabel3にLabel6の値を代入
                 store.Label4.Text = Label7.Text
-
                 store.keep() ' storeフォームのkeep関数を呼び出す
                 Answer = MsgBox("     あなたの負けです" & vbCrLf & "     もう一度しますか？", MsgBoxStyle.YesNo, "敗北")
                 roopcount += 1 ' インクリメント(必ず2になる)
@@ -249,9 +365,13 @@
 
         Else
             Dim Answer As MsgBoxResult ' MsgBoxの結果を保存しておくための変数Answerを宣言
-            store.Label3.Text = Label6.Text
+            ' ディーラーの21チェック
+            store.Label3.Text = Label1.Text
+            store.Label4.Text = Label2.Text
+            store.keep() ' storeフォームのkeep関数を呼び出す(21の数を数える関数)
+            ' 自分の21チェック
+            store.Label3.Text = Label6.Text ' storeフォームのLabel3にLabel6の値を代入
             store.Label4.Text = Label7.Text
-
             store.keep() ' storeフォームのkeep関数を呼び出す
             Answer = MsgBox("     あなたの勝ちです" & vbCrLf & "     もう一度しますか？", MsgBoxStyle.YesNo, "ディーラバスト")
             roopcount += 1 ' インクリメント(必ず2になる)
@@ -285,6 +405,7 @@
         Dim r As New Random     '乱数宣言
         Dim f1 As New Main ' Mainフォームのインスタンスを生成
         Dim answer2 As New MsgBoxResult ' MsgBoxの結果を保存しておくための変数answer2を宣言
+        Dim ten_over_judge As Integer '3枚目以降のカードについて、適切な値を設定するために使用する'
 
         Select Case kaisu2  'kaisu2について
             Case 0  '一回目
@@ -294,12 +415,16 @@
                 Label8.Text = ransu     'ラベルに生成した乱数を表示
 
                 printt(8, ransu)    'printt関数を呼び出しpictureboxに表面表示
-
-                If Label8.Text <= 10 Then
-                    goukei2 = goukei2 + Label8.Text
+                If Label8.Text <= 10 Then '10以下の場合'
+                    If Label8.Text = 1 And goukei2 + 11 <= 21 Then '3枚目が1の場合であり、かつ、これまでのカードとの合計が21以下の場合'
+                        ten_over_judge = 11 '三枚目のカードである1を11とする'
+                    Else
+                        ten_over_judge = Label8.Text '1を1のままとする'
+                    End If
                 Else
-                    goukei2 = goukei2 + 10
+                    ten_over_judge = 10 '10より大きい値は10とする'
                 End If
+                goukei2 = goukei2 + ten_over_judge ' 自分の合計値の更新
                 kaisu2 = kaisu2 + 1
             Case 1  '二回目
                 Dim number2 As Integer = r.Next(1, 14)  '乱数生成
@@ -308,12 +433,16 @@
                 Label9.Text = ransu     'ラベルに生成した乱数を表示
 
                 printt(9, ransu)    'printt関数を呼び出しpictureboxに表面表示
-
-                If Label9.Text <= 10 Then
-                    goukei2 = goukei2 + Label9.Text
+                If Label9.Text <= 10 Then '10以下の場合'
+                    If Label9.Text = 1 And goukei2 + 11 <= 21 Then '3枚目が1の場合であり、かつ、これまでのカードとの合計が21以下の場合'
+                        ten_over_judge = 11 '三枚目のカードである1を11とする'
+                    Else
+                        ten_over_judge = Label9.Text '1を1のままとする'
+                    End If
                 Else
-                    goukei2 = goukei2 + 10
+                    ten_over_judge = 10 '10より大きい値は10とする'
                 End If
+                goukei2 = goukei2 + ten_over_judge ' 自分の合計値の更新
                 kaisu2 = kaisu2 + 1
             Case 2  '三回目
                 Dim number3 As Integer = r.Next(1, 14)  '乱数生成
@@ -322,12 +451,16 @@
                 Label10.Text = ransu     'ラベルに生成した乱数を表示
 
                 printt(10, ransu)    'printt関数を呼び出しpictureboxに表面表示
-
-                If Label10.Text <= 10 Then
-                    goukei2 = goukei2 + Label10.Text
+                If Label10.Text <= 10 Then '10以下の場合'
+                    If Label10.Text = 1 And goukei2 + 11 <= 21 Then '3枚目が1の場合であり、かつ、これまでのカードとの合計が21以下の場合'
+                        ten_over_judge = 11 '三枚目のカードである1を11とする'
+                    Else
+                        ten_over_judge = Label10.Text '1を1のままとする'
+                    End If
                 Else
-                    goukei2 = goukei2 + 10
+                    ten_over_judge = 10 '10より大きい値は10とする'
                 End If
+                goukei2 = goukei2 + ten_over_judge ' 自分の合計値の更新
                 kaisu2 = kaisu2 + 1
             Case 3  '四回目以降
                 Dim Answer As MsgBoxResult
@@ -341,7 +474,7 @@
             store.Label3.Text = Label6.Text
             store.Label4.Text = Label7.Text
             store.keep() ' storeフォームのkeep関数を呼び出す
-            answer2 = MsgBox("     あなたの負けです" & vbCrLf & "     もう一度しますか？", MsgBoxStyle.YesNo, "バスト")
+            answer2 = MsgBox("     あなたの負けです" & vbCrLf & "     もう一度しますか？", MsgBoxStyle.YesNo, "バースト")
             roopcount += 1 ' インクリメント(必ず2になる)
             store.roop1 = roopcount ' roopcountの値をstoreフォームのroop1に代入
             store.roop() ' storeフォームのroop関数を呼び出す
@@ -373,6 +506,7 @@
 
         Dim SHDC As Integer = r.Next(1, 5)  '乱数生成とSDHCへの代入
         Dim PBoxnumber As PictureBox
+        PBoxnumber = PictureBox1 ' 初期化(直ぐに引数で指定されたLabelnumberに沿ったPictureBox[1-9]+が入り、上書きされる。, NULL参照の例外が発生する確率を無くすために初期化している)
 
         If Labelnumber = 1 Then         'Lavel1のときPictureBox1
             PBoxnumber = PictureBox1
